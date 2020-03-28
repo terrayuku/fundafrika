@@ -1,0 +1,101 @@
+<nav class="navbar navbar-dark bg-primary justify-content-between">
+  <a class="navbar-brand" href="#">
+    <span style="color: white;">FundAfrika</span>
+  </a>
+     
+      <a aria-label="Logout" style="color: white;" 
+      target="_blank" rel="noopener" title="Logout"  (click)="logout()">
+        Logout
+      </a>
+</nav>
+<div class="container">
+  <h1 class="header">Hello {{user.name}}</h1>
+  <p class="header" style="font-size: 1rem;">Please update your information</p>
+
+        <form class="create-form form-style" [formGroup]="profileForm" novalidate (ngSubmit)="onSubmit(profileForm.value)">
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <input matInput placeholder="Name" class="form-control" formControlName="name">
+            </mat-form-field>
+            <ng-container *ngFor="let validation of validation_messages.name">
+              <mat-error *ngIf="profileForm.get('name').hasError(validation.type) && (profileForm.get('name').dirty 
+              || profileForm.get('name').touched)">{{validation.message}}</mat-error>
+            </ng-container>
+          </div>
+        
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <input matInput placeholder="Surname" class="form-control" formControlName="surname">
+            </mat-form-field>
+            <ng-container *ngFor="let validation of validation_messages.surname">
+              <mat-error *ngIf="profileForm.get('surname').hasError(validation.type) && (profileForm.get('surname').dirty
+               || profileForm.get('surname').touched)">{{validation.message}}</mat-error>
+            </ng-container>
+          </div>
+        
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <input matInput type="number" min="0" max="100" placeholder="Age" class="form-control" formControlName="age">
+            </mat-form-field>
+            <ng-container *ngFor="let validation of validation_messages.age">
+              <mat-error *ngIf="profileForm.get('age').hasError(validation.type) && (profileForm.get('age').dirty 
+              || profileForm.get('age').touched)">{{validation.message}}</mat-error>
+            </ng-container>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <input matInput type="number" min="0" max="100" placeholder="Grade" class="form-control" formControlName="grade">
+            </mat-form-field>
+            <ng-container *ngFor="let validation of validation_messages.grade">
+              <mat-error *ngIf="profileForm.get('grade').hasError(validation.type) && (profileForm.get('grade').dirty 
+              || profileForm.get('grade').touched)">{{validation.message}}</mat-error>
+            </ng-container>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <select class="custom-select" formControlName="province">
+                <option value=""> Select Province</option>
+                <option value="Eastern Cape">Eastern Cape</option>
+                <option value="Free State">Free State</option>
+                <option value="Gauteng">Gauteng</option>
+                <option value="Mpumalanga">Mpumalanga</option>
+                <option value="Limpopo">Limpopo</option>
+                <option value="Western Cape">Western Cape</option>
+                <option value="Northen Cape">Nothern Cape</option>
+                <option value="North West">Noth West</option>
+              </select>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <select class="custom-select" formControlName="category">
+                <option value=""> Select Category</option>
+                <option value="teacher">Teacher</option>
+                <option value="student">Student</option>
+                <option value="moderator">Subject Moderator</option>
+              </select>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <small id="subjects" class="form-text text-muted">Please select subject (Use control key to select multiple)</small>
+              <select class="custom-select" formControlName="subjects" multiple>
+                <option value="mathematics">Mathematics</option>
+                <option value="physics">Physics</option>
+                <option value="computer">Computer</option>
+              </select>
+            </mat-form-field>
+          </div>
+
+          <div class="row submit-button-container">
+            <div class="col-md-4">
+              <button mat-raised-button class="btn btn-primary" type="submit" [disabled]="!profileForm.valid">Create</button>
+            </div>
+          </div>
+        </form>
+</div>

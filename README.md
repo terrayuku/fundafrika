@@ -7,11 +7,13 @@ This application allows teacher's to upload tutorial leasons recorded in their o
 
 ## Development
 
-clone the project using `git clone https://github.com/{your-git-username}/fundafrika.git`
+Clone the project using `git clone https://github.com/{your-git-username}/fundafrika.git`
 
 Get into the project using `cd FundAfrikaApp`
 
-install all dependencies `npm install`
+Install all dependencies `npm install`
+
+Install firebase tools `npm install -g firebase-tools`
 
 Login to firebase so that you can test `firebase login`
 

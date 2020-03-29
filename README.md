@@ -7,6 +7,8 @@ This application allows teacher's to upload tutorial leasons recorded in their o
 
 ## Development
 
+Please make sure you have nodejs intalled in your machine
+
 Clone the project using `git clone https://github.com/{your-git-username}/fundafrika.git`
 
 Get into the project using `cd FundAfrikaApp`

@@ -6,7 +6,7 @@ This application allows teacher's to upload tutorial leasons recorded in their o
 
 ## Development
 
-clone the project using `git clone https://github.com/terrayuku/fundafrika.git`
+clone the project using `git clone https://github.com/{your-git-username}/fundafrika.git`
 
 Get into the project using `cd FundAfrikaApp`
 
@@ -25,7 +25,7 @@ Commit the files `git commit -m 'the-change-you-made'`
 
 If you haven't added the repo
 
-run `git add remote https://github.com/terrayuku/fundafrika.git`
+run `git add remote https://github.com/{your-git-username}/fundafrika.git`
 
 Push changes `git push -u origin master`
 

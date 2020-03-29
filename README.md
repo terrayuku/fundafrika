@@ -1,4 +1,5 @@
-# FundAfirkaApp
+# [FundAfirkaApp](https://fundafrika.web.app/login)
+
 
 Is a platform that exist to enhance the learning of our generation through their mother toung. We promote indeginous understanding of our scientific world.
 

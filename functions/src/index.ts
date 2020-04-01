@@ -9,8 +9,8 @@ admin.initializeApp();
 //  response.send("Hello from Firebase!");
 // });
 // Listens for new users added to /users
-exports.setUserRole = functions.database.ref('/users/{uid}')
-    .onCreate((snapshot, context) => {
+exports.setUserRole = functions.database.ref('/users/{role}/{uid}')
+    .onWrite((snapshot, context) => {
       // Grab the current value of what was written to the Realtime Database.
       return new Promise<any>((resolve, reject) => {
           if(context.auth !== undefined) {

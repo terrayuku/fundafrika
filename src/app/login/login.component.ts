@@ -26,50 +26,57 @@ export class LoginComponent {
 
   createForm() {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required ],
-      password: ['',Validators.required]
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
-  tryFacebookLogin(){
+  tryFacebookLogin() {
     this.authService.doFacebookLogin()
-    .then(res => {
-      this.router.navigate(['/user']);
-    })
+      .then(res => {
+        this.router.navigate(['/user']);
+      })
   }
 
-  tryTwitterLogin(){
+  tryTwitterLogin() {
     this.authService.doTwitterLogin()
-    .then(res => {
-      this.router.navigate(['/user']);
-    })
+      .then(res => {
+        this.router.navigate(['/user']);
+      })
   }
 
-  tryGoogleLogin(){
+  tryGoogleLogin() {
     this.authService.doGoogleLogin()
-    .then(role => {
-      this.userService.getCurrentUser()
-      .then((res) => {
-        console.log(res.uid);
-        this.router.navigate(['/dashboard/', res.uid, role]);
+      .then(role => {
+        if (role === "UPDATE_PROFILE") {
+          this.router.navigate(['/user']);
+        } else {
+          this.userService.getCurrentUser()
+            .then((res) => {
+              this.router.navigate(['/dashboard/', res.uid, role]);
+            });
+        }
+      }, err => {
+        console.log(err);
+        this.errorMessage = err.message;
       });
-    }, err => {
-      console.log(err);
-      this.errorMessage = err.message;
-    });
   }
 
-  tryLogin(value){
+  tryLogin(value) {
     this.authService.doLogin(value)
-    .then(role => {
-      this.userService.getCurrentUser()
-      .then((res) => {
-        console.log(res)
-        this.router.navigate(['/dashboard/', res.uid, role]);
+      .then(role => {
+        // profile not updated
+        console.log(role);
+        if (role === "UPDATE_PROFILE") {
+          this.router.navigate(['/user']);
+        } else {
+          this.userService.getCurrentUser()
+            .then((res) => {
+              this.router.navigate(['/dashboard/', res.uid, role]);
+            });
+        }
+      }, err => {
+        this.errorMessage = err.message;
       });
-    }, err => {
-      console.log(err);
-      this.errorMessage = err.message;
-    });
   }
 }

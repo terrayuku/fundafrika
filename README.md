@@ -36,6 +36,14 @@ Push changes `git push -u origin master`
 
 Please notify once changes are done so that we can schedule a test and deployment
 
+Deploying a cloud function
+
+`firebase deploy --only functions`
+
+Deploying to the site
+
+`firebase deploy --only hosting:fundafrika`
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.

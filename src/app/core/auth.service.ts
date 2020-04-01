@@ -59,7 +59,8 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
       .then(res => {
-        resolve(res);
+        const role = this.getRole(firebase.auth().currentUser);
+        resolve(role);
       }, err => reject(err))
     })
   }
@@ -84,7 +85,7 @@ export class AuthService {
             resolve(idTokenResult.claims.role)
           } else {
             // no role
-            reject("ERROR");
+            resolve("UPDATE_PROFILE");
           }
       })
       .catch((error) => {

@@ -4,19 +4,20 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import * as firebase from 'firebase/app';
+import { resolve } from 'dns';
 
 @Injectable()
 export class UserService {
   constructor(
-   public db: AngularFireDatabase,
-   public afAuth: AngularFireAuth
- ){
- }
+    public db: AngularFireDatabase,
+    public afAuth: AngularFireAuth
+  ) {
+  }
 
 
-  getCurrentUser(){
+  getCurrentUser() {
     return new Promise<any>((resolve, reject) => {
-      var user = firebase.auth().onAuthStateChanged(function(user){
+      var user = firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
           resolve(user);
         } else {
@@ -26,7 +27,7 @@ export class UserService {
     })
   }
 
-  updateCurrentUser(value){
+  updateCurrentUser(value) {
     return new Promise<any>((resolve, reject) => {
       var user = firebase.auth().currentUser;
       user.updateProfile({
@@ -38,25 +39,25 @@ export class UserService {
     })
   }
 
-  createUser(value, id){
-    return this.db.database.ref("users/" + value.category + '/' + id).
-    set({
-      name: value.name,
-      nameToSearch: value.name.toLowerCase(),
-      surname: value.surname,
-      age: parseInt(value.age),
-      grade: parseInt(value.grade),
-      category: value.category,
-      province: value.province,
-      subjects: value.subjects
-      // avatar: avatar
-    }, function(error) {
-      if(error) {
-        return false;
-      } else {
-        // route to dashboard
-        console.log("Succes");
-      }
+  createUser(value, id) {
+    return new Promise<any>((resolve, reject) => {
+      this.db.database.ref("users/" + value.category + '/' + id).
+        set({
+          name: value.name,
+          nameToSearch: value.name.toLowerCase(),
+          surname: value.surname,
+          age: parseInt(value.age),
+          grade: parseInt(value.grade),
+          category: value.category,
+          province: value.province,
+          subjects: value.subjects
+          // avatar: avatar
+        }).then(res => {
+          resolve(res);
+        }).catch(err => {
+          console.log(err);
+          reject(err);
+        });
     });
   }
 }

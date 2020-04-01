@@ -11,7 +11,7 @@ import { UserModel } from '../core/user.model';
   templateUrl: 'user.component.html',
   styleUrls: ['user.component.css']
 })
-export class UserComponent implements OnInit{
+export class UserComponent implements OnInit {
 
   user: UserModel = new UserModel();
   profileForm: FormGroup;
@@ -44,7 +44,7 @@ export class UserComponent implements OnInit{
     public userService: UserService,
     public authService: AuthService,
     private route: ActivatedRoute,
-    private location : Location,
+    private location: Location,
     private fb: FormBuilder,
     private router: Router
   ) {
@@ -65,7 +65,7 @@ export class UserComponent implements OnInit{
 
   createForm(name, surname, age, grade, province, category, subjects) {
     this.profileForm = this.fb.group({
-      name: [name, Validators.required ],
+      name: [name, Validators.required],
       surname: [surname, Validators.required],
       age: [age, Validators.required],
       grade: [grade, Validators.required],
@@ -75,23 +75,23 @@ export class UserComponent implements OnInit{
     });
   }
 
-  save(value){
+  save(value) {
     this.userService.updateCurrentUser(value)
-    .then(res => {
-      console.log(res);
-    }, err => console.log(err))
+      .then(res => {
+        console.log(res);
+      }, err => console.log(err))
   }
 
-  logout(){
+  logout() {
     this.authService.doLogout()
-    .then((res) => {
-      this.location.back();
-    }, (error) => {
-      console.log("Logout error", error);
-    });
+      .then((res) => {
+        this.location.back();
+      }, (error) => {
+        console.log("Logout error", error);
+      });
   }
 
-  resetFields(){
+  resetFields() {
     // this.avatarLink = "https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg";
     this.profileForm = this.fb.group({
       name: new FormControl('', Validators.required),
@@ -104,12 +104,16 @@ export class UserComponent implements OnInit{
     });
   }
 
-  onSubmit(value){
+  onSubmit(value) {
     this.userService.createUser(value, this.uid)
-    .then(
-      res => {
-        this.resetFields();
-      }
-    )
+      .then(res => {
+        this.userService.getCurrentUser()
+          .then((res) => {
+            this.router.navigate(['/dashboard/', res.uid, value.category]);
+          });
+      }, err => {
+        console.log(err);
+      });
+    this.resetFields();
   }
 }

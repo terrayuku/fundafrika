@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../core/auth.service';
+import { UserService } from '../core/user.service';
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from 'firebase';
 
 @Component({
   selector: 'login',
@@ -15,6 +17,7 @@ export class LoginComponent {
 
   constructor(
     public authService: AuthService,
+    public userService: UserService,
     private router: Router,
     private fb: FormBuilder
   ) {
@@ -44,18 +47,29 @@ export class LoginComponent {
 
   tryGoogleLogin(){
     this.authService.doGoogleLogin()
-    .then(res => {
-      this.router.navigate(['/user']);
-    })
+    .then(role => {
+      this.userService.getCurrentUser()
+      .then((res) => {
+        console.log(res.uid);
+        this.router.navigate(['/dashboard/', res.uid, role]);
+      });
+    }, err => {
+      console.log(err);
+      this.errorMessage = err.message;
+    });
   }
 
   tryLogin(value){
     this.authService.doLogin(value)
-    .then(res => {
-      this.router.navigate(['/user']);
+    .then(role => {
+      this.userService.getCurrentUser()
+      .then((res) => {
+        console.log(res)
+        this.router.navigate(['/dashboard/', res.uid, role]);
+      });
     }, err => {
       console.log(err);
       this.errorMessage = err.message;
-    })
+    });
   }
 }

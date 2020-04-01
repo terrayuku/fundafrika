@@ -46,7 +46,8 @@ export class AuthService {
       this.afAuth.auth
       .signInWithPopup(provider)
       .then(res => {
-        resolve(res);
+        const role = this.getRole(firebase.auth().currentUser);
+        resolve(role);
       }, err => {
         console.log(err);
         reject(err);
@@ -67,9 +68,29 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.email, value.password)
       .then(res => {
-        resolve(res);
+        const role = this.getRole(firebase.auth().currentUser);
+        resolve(role);
       }, err => reject(err))
     })
+  }
+
+  getRole(currentUser) {
+    return new Promise<any>((resolve, reject) => {
+      currentUser.getIdTokenResult()
+        .then((idTokenResult) => {
+         // Confirm the user has a role.
+          if (!!idTokenResult.claims.role) {
+            // return user role
+            resolve(idTokenResult.claims.role)
+          } else {
+            // no role
+            reject("ERROR");
+          }
+      })
+      .catch((error) => {
+         console.error(error);
+      });
+    });
   }
 
   doLogout(){

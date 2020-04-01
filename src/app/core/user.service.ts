@@ -7,7 +7,6 @@ import * as firebase from 'firebase/app';
 
 @Injectable()
 export class UserService {
-
   constructor(
    public db: AngularFireDatabase,
    public afAuth: AngularFireAuth
@@ -40,7 +39,7 @@ export class UserService {
   }
 
   createUser(value, id){
-    return this.db.database.ref(value.category + '/' + id).
+    return this.db.database.ref("users/" + value.category + '/' + id).
     set({
       name: value.name,
       nameToSearch: value.name.toLowerCase(),

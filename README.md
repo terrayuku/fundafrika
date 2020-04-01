@@ -24,6 +24,10 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 After making the changes
 Prepare for deployment
 
+Make sure you run 
+`ng build --prod`
+before pushing the code to make sure everything is correct syntax wise
+
 Add changed files to git `git add .`
 
 Commit the files `git commit -m 'the-change-you-made'`

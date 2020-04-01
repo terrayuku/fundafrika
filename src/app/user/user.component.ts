@@ -58,12 +58,12 @@ export class UserComponent implements OnInit {
       if (data) {
         this.user = data;
         this.createForm(this.user.name, this.user.surname, this.user.age, this.user.grade, this.user.province,
-          this.user.category, this.user.subjects);
+          this.user.category, this.user.subjects, this.user.language);
       }
     })
   }
 
-  createForm(name, surname, age, grade, province, category, subjects) {
+  createForm(name, surname, age, grade, province, category, subjects, language) {
     this.profileForm = this.fb.group({
       name: [name, Validators.required],
       surname: [surname, Validators.required],
@@ -71,7 +71,8 @@ export class UserComponent implements OnInit {
       grade: [grade, Validators.required],
       province: [province, Validators.required],
       category: [category, Validators.required],
-      subjects: [subjects, Validators.required]
+      subjects: [subjects, Validators.required],
+      language: [language, Validators.required]
     });
   }
 

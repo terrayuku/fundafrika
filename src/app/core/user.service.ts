@@ -4,7 +4,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import * as firebase from 'firebase/app';
-import { resolve } from 'dns';
 
 @Injectable()
 export class UserService {
@@ -44,13 +43,13 @@ export class UserService {
       this.db.database.ref("users/" + value.category + '/' + id).
         set({
           name: value.name,
-          nameToSearch: value.name.toLowerCase(),
           surname: value.surname,
           age: parseInt(value.age),
           grade: parseInt(value.grade),
           category: value.category,
           province: value.province,
-          subjects: value.subjects
+          subjects: value.subjects,
+          language: value.language
           // avatar: avatar
         }).then(res => {
           resolve(res);

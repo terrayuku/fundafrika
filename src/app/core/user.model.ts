@@ -8,6 +8,7 @@ export class UserModel {
     subjects: string;
     province: string;
     grade: string;
+    language: string;
   
     constructor(){
       this.image = "";
@@ -19,6 +20,7 @@ export class UserModel {
       this.subjects = "";
       this.province = "";
       this.grade = "";
+      this.language = "";
     }
   }
   

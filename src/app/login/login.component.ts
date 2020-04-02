@@ -66,7 +66,6 @@ export class LoginComponent {
     this.authService.doLogin(value)
       .then(role => {
         // profile not updated
-        console.log(role);
         if (role === "UPDATE_PROFILE") {
           this.router.navigate(['/user']);
         } else {

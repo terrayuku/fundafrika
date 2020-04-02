@@ -82,6 +82,7 @@ export class AuthService {
          // Confirm the user has a role.
           if (!!idTokenResult.claims.role) {
             // return user role
+            console.log(idTokenResult.claims.role);
             resolve(idTokenResult.claims.role)
           } else {
             // no role

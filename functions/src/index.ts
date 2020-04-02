@@ -14,10 +14,9 @@ exports.setUserRole = functions.database.ref('/users/{role}/{uid}')
       // Grab the current value of what was written to the Realtime Database.
       return new Promise<any>((resolve, reject) => {
           if(context.auth !== undefined) {
-              const uid = context.auth.uid;
-
+                const uid = context.auth.uid;
             admin.auth().setCustomUserClaims(context.auth.uid, {
-                role: context.params.uid
+                role: context.params.role
             }).then((res) => {
                 console.log("Users role " + uid + " was updated ok");
                 resolve(res);

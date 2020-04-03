@@ -30,7 +30,7 @@ export class UserService {
     return new Promise<any>((resolve, reject) => {
       var user = firebase.auth().currentUser;
       user.updateProfile({
-        displayName: value.name,
+        displayName: value.name + " " + value.surname,
         photoURL: user.photoURL
       }).then(res => {
         resolve(res);
@@ -52,6 +52,7 @@ export class UserService {
           language: value.language
           // avatar: avatar
         }).then(res => {
+          this.updateCurrentUser(value);
           resolve(res);
         }).catch(err => {
           console.log(err);

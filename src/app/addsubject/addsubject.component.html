@@ -1,0 +1,61 @@
+<nav class="navbar navbar-dark bg-primary justify-content-between">
+    <a class="navbar-brand" href="#">
+        <span style="color: white;">FundAfrika</span>
+    </a>
+    <a aria-label="Logout" style="color: white;" target="_blank" rel="noopener" title="Logout" (click)="logout()">
+        Logout
+    </a>
+</nav>
+
+<div class="container">
+    <form [formGroup]="addSubjectForm" class="create-form form-style">
+        <h2>Add Subject</h2>
+        <div class="form-group">
+            <label for="addSubject">Subject Name</label>
+            <input type="addSubject" class="form-control" formControlName="subject" aria-describedby="addSubjectHelp"
+                placeholder="Enter subject">
+        </div>
+        <div class="row submit-button-container">
+            <div class="col-md-4">
+                <button type="submit" (click)="addSubject(addSubjectForm.value)" class="btn btn-primary">Add
+                    Subject</button>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" (click)="getAllSubjects()" class="btn btn-primary">Get Subjects</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <div class="col">
+        <hr />
+        <div class="col-12" *ngFor="let s of subjects">
+            <h5>{{s.subject}}</h5>
+            <div class="row">
+                <div class="col-4">
+                    <span>Students</span>
+                    {{s.numberOfStudentsSubscribed}}
+                </div>
+                <div class="col-4">
+                    Teachers {{s.numberOfTeachersSubscribed}}
+                </div>
+                <div class="col-4">
+                    Moderators {{s.numberOfModeratorsSubscribed}}
+                </div>
+            </div>
+            <br>
+        </div>
+        <form [formGroup]="addSubjectForm" class="create-form form-style">
+            <mat-form-field class="input-style" *ngIf="subjects.length > 0">
+                <small id="subjects" class="form-text text-muted">Subscribe to a subject</small>
+                <select class="custom-selectf" formControlName="subject">
+                    <option *ngFor="let s of subjects" value="{{s.subject}}">{{s.subject}}</option>
+                </select>
+            </mat-form-field>
+            <div class="col-md-4">
+                <button type="submit" (click)="subscribe(addSubjectForm.value)" class="btn btn-primary">Subscribe</button>
+            </div>
+        </form>
+    </div>
+</div>

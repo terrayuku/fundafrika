@@ -48,6 +48,44 @@ Deploying to the site
 
 `firebase deploy --only hosting:fundafrika`
 
+## [GIT-FLOW](https://danielkummer.github.io/git-flow-cheatsheet/)
+
+Start a new feature
+`git flow feature start MYFEATURE `
+
+Finish up a feature
+`git flow feature finish MYFEATURE`
+
+Publish a feature
+`git flow feature publish MYFEATURE`
+
+Getting a published feature
+`git flow feature pull origin MYFEATURE `
+
+Track a feature
+`git flow feature track MYFEATURE `
+
+Start a release 
+`git flow release start RELEASE`
+
+Publish a release
+`git flow release publish RELEASE`
+
+Track a release
+`git flow release track RELEASE`
+
+Finish up a release
+`git flow release finish RELEASE `
+
+Push the tags
+`git push origin --tags`
+
+Start a hotfix
+`git flow hotfix start VERSION [BASENAME] `
+
+Finish a hotfix
+`git flow hotfix finish VERSION `
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.

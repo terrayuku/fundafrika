@@ -26,6 +26,10 @@ export class UserService {
     })
   }
 
+  currentUser() {
+    return firebase.auth().currentUser;
+  }
+
   updateCurrentUser(value) {
     return new Promise<any>((resolve, reject) => {
       var user = firebase.auth().currentUser;

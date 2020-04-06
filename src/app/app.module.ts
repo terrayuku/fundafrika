@@ -18,6 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AddsubjectComponent } from './addsubject/addsubject.component';
+import { SubjectService } from './core/subject.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LoginComponent,
     UserComponent,
     RegisterComponent,
-    DashboardComponent
+    DashboardComponent,
+    AddsubjectComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AngularFireDatabaseModule
   ],
-  providers: [AuthService, UserService, UserResolver, AuthGuard],
+  providers: [AuthService, UserService, UserResolver, AuthGuard, SubjectService],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ]
 })

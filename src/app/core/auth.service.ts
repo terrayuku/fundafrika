@@ -10,6 +10,10 @@ export class AuthService {
    public afAuth: AngularFireAuth
  ){}
 
+ currentUser() {
+  return firebase.auth().currentUser;
+}
+
   doFacebookLogin(){
     return new Promise<any>((resolve, reject) => {
       let provider = new firebase.auth.FacebookAuthProvider();

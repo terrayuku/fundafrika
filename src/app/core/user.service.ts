@@ -4,12 +4,14 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import * as firebase from 'firebase/app';
+import { SubscriptionModule } from './subscription/subscription.module';
 
 @Injectable()
 export class UserService {
   constructor(
     public db: AngularFireDatabase,
-    public afAuth: AngularFireAuth
+    public afAuth: AngularFireAuth,
+    private subscriptionModule: SubscriptionModule
   ) {
   }
 
@@ -24,10 +26,6 @@ export class UserService {
         }
       })
     })
-  }
-
-  currentUser() {
-    return firebase.auth().currentUser;
   }
 
   updateCurrentUser(value) {
@@ -57,6 +55,10 @@ export class UserService {
           // avatar: avatar
         }).then(res => {
           this.updateCurrentUser(value);
+          this.subscriptionModule.subscribeToASubject({
+            role: value.category,
+            subject: value.subjects[0]
+          });
           resolve(res);
         }).catch(err => {
           console.log(err);

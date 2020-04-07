@@ -5,6 +5,7 @@ import { SubjectService } from '../core/subject.service';
 import { AuthService } from '../core/auth.service';
 import { Location } from '@angular/common';
 import { Subject } from '../core/subject.model';
+import { SubscriptionModule } from '../core/subscription/subscription.module';
 
 @Component({
   selector: 'app-addsubject',
@@ -15,6 +16,7 @@ export class AddsubjectComponent implements OnInit {
   subjects = [];
   addSubjectForm: FormGroup
   constructor(
+    private subscriptionModule: SubscriptionModule,
     private subjectService: SubjectService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -69,7 +71,7 @@ export class AddsubjectComponent implements OnInit {
 
   subscribe(value) {
     console.log(value);
-    this.subjectService.subscribeToASubject(value)
+    this.subscriptionModule.subscribeToASubject(value)
       .then(res => {
         console.log(res);
       })

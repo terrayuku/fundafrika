@@ -20,6 +20,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddsubjectComponent } from './addsubject/addsubject.component';
 import { SubjectService } from './core/subject.service';
+import { SubscriptionModule } from './core/subscription/subscription.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { SubjectService } from './core/subject.service';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AngularFireDatabaseModule
   ],
-  providers: [AuthService, UserService, UserResolver, AuthGuard, SubjectService],
+  providers: [AuthService, UserService, UserResolver, AuthGuard, SubjectService, SubscriptionModule],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ]
 })

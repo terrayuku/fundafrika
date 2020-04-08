@@ -1,0 +1,37 @@
+<nav class="navbar navbar-dark bg-primary justify-content-between">
+    <a class="navbar-brand" href="#">
+        <span style="color: white;">FundAfrika</span>
+    </a>
+    <a aria-label="Logout" style="color: white;" target="_blank" rel="noopener" title="Logout" (click)="logout()">
+        Logout
+    </a>
+</nav>
+
+<div class="container">
+    <form [formGroup]="uploadForm" class="create-form form-style">
+        <h2>Upload Tutorial</h2>
+        <div class="form-group">
+            <div class="form-group">
+                <mat-form-field class="input-style">
+                    <small id="subjects" class="form-text text-muted">Please select subject (Use control key to select
+                        multiple)</small>
+                    <select class="custom-select" formControlName="subject">
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Computer Literacy">Computer Literacy</option>
+                    </select>
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <label for="file">File:</label>
+                <input type="file" formControlName="video" (change)="browse($event)" accept="*" />
+            </div>
+        </div>
+        <!-- <exoplayer src="{{loc}}" class="video-player" autoplay="true" height="320"></exoplayer> -->
+        <div class="row submit-button-container">
+            <div class="col-md-4">
+                <button type="submit" (click)="uploadVideo(uploadForm.value)" class="btn btn-primary">Upload</button>
+            </div>
+        </div>
+    </form>
+</div>

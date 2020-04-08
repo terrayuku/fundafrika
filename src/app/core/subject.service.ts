@@ -37,4 +37,13 @@ export class SubjectService {
         });
     });
   }
+
+  updateTutorial(subject, downloadURL) {
+    console.log("Upload Subject");
+    return new Promise<any>((resolve, reject) => {
+      this.db.database.ref("subjects/" + subject + "/tutorials").push({
+        downloadURL: downloadURL
+      })
+    });
+  }
 }

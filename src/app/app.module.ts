@@ -43,7 +43,7 @@ import { UploadService } from './core/upload.service';
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
   ],
   providers: [AuthService, UserService, UserResolver, AuthGuard, SubjectService, SubscriptionModule, UploadService],
   bootstrap: [AppComponent],

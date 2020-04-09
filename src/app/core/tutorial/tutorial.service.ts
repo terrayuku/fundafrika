@@ -22,4 +22,13 @@ export class TutorialService {
       }).catch(err => reject(err));
     });
   }
+
+  getAllTutorial() {
+    return new Promise<any>((resolve, reject) => {
+      this.db.list("tutorials").snapshotChanges()
+        .subscribe(tutorials => {
+          resolve(tutorials);         
+        });
+    });
+  }
 }

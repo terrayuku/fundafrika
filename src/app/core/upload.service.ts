@@ -23,7 +23,7 @@ export class UploadService {
     return new Promise<any>((resolve, reject) => {
       let task = this.storage.ref("videos/" + subject + "/" + video.name).put(video);
       task.then(t => {
-        if(t.task.snapshot.state === "success") {
+        if (t.task.snapshot.state === "success") {
           t.task.snapshot.ref.getDownloadURL().then(downloadURL => {
             this.authService.getRole(this.authService.currentUser()).then(role => {
               // add tutorial
@@ -34,13 +34,11 @@ export class UploadService {
               });
               // add tutorial to subject
               this.subjectService.updateTutorial(subject, downloadURL);
-            }).catch(err => reject(err)); 
+            }).catch(err => reject(err));
           });
-        } 
+        }
         resolve(t);
       }).catch(err => reject(err));
-      
-             
-      });
+    });
   }
 }

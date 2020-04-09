@@ -3,10 +3,7 @@ import { UploadService } from '../core/upload.service';
 import { AuthService } from '../core/auth.service';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-// import { registerElement } from "nativescript-angular/element-registry";
-// // import { Video } from "nativescript-videoplayer";
-// registerElement("exoplayer", () => require("nativescript-exoplayer").Video);    
+import { TutorialService } from '../core/tutorial/tutorial.service';
 
 @Component({
   selector: 'app-upload',
@@ -19,7 +16,9 @@ export class UploadComponent implements OnInit {
   uploadForm: FormGroup
   video: File
   loc: string
+  tutorialsList: Object[] = []
   constructor(
+    private tutorialService: TutorialService,
     private uploadService: UploadService,
     private authService: AuthService,
     private formBuilder: FormBuilder,
@@ -28,7 +27,14 @@ export class UploadComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    this.loc = "gs://fundafrika-2e7be.appspot.com/videos/Computer Literacy/Vusi.mp4";
+    this.tutorialService.getAllTutorial().then(tutorials => {
+      tutorials.forEach(tutorial => {
+        if(tutorial.payload.val().teacher === this.authService.currentUser().uid) {
+          this.loc = tutorial.payload.val().tutorialUrl
+          this.tutorialsList.push(tutorial.payload.val());
+        }
+      });
+    });
   }
 
   createForm() {
@@ -39,14 +45,12 @@ export class UploadComponent implements OnInit {
   }
 
   browse(event) {
-    console.log(event.target, event.target.files)
     this.video = event.target.files[0];
   }
 
   uploadVideo(value) {
     this.uploadService.uploadVideo(value.subject, this.video)
       .then(task => {
-        console.log("Task ", task);
       })
       .catch(err => {
         console.log(err);

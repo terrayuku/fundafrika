@@ -56,7 +56,7 @@ export class SubscriptionModule {
           this.getASubject(value, role === "UPDATE_PROFILE" ? value.role : role)
             .then(subject => {
               this.updateSubscription(value.subject, subject.key.toString(), subject.payload.val() + 1);
-              this.updateSubjectSubscription(value, role, currentUser.uid);
+              this.updateSubjectSubscription(value, role === "UPDATE_PROFILE" ? value.role : role, currentUser.uid);
             });
         }).catch(err => {
           console.log(err);

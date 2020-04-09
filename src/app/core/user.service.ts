@@ -66,4 +66,15 @@ export class UserService {
         });
     });
   }
+
+  updateTutorial(downloadUrl, role, subject) {
+    console.log("Upload Tutorial");
+    return new Promise<any>((resolve, reject) => {
+      this.db.database.ref("users/" + role + "/" + firebase.auth().currentUser.uid + "/subjects/" + subject + "/tutorials").push({
+        tutorialUrl: downloadUrl
+      }).then(res => {
+        resolve(res);
+      }).catch(err => reject(err));
+    });
+  }
 }

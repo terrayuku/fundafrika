@@ -21,6 +21,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddsubjectComponent } from './addsubject/addsubject.component';
 import { SubjectService } from './core/subject.service';
 import { SubscriptionModule } from './core/subscription/subscription.module';
+import { UploadComponent } from './upload/upload.component';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { UploadService } from './core/upload.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { SubscriptionModule } from './core/subscription/subscription.module';
     UserComponent,
     RegisterComponent,
     DashboardComponent,
-    AddsubjectComponent
+    AddsubjectComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,
@@ -38,9 +42,10 @@ import { SubscriptionModule } from './core/subscription/subscription.module';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
   ],
-  providers: [AuthService, UserService, UserResolver, AuthGuard, SubjectService, SubscriptionModule],
+  providers: [AuthService, UserService, UserResolver, AuthGuard, SubjectService, SubscriptionModule, UploadService],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ]
 })

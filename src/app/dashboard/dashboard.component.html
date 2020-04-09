@@ -1,14 +1,16 @@
 <nav class="navbar navbar-dark bg-primary justify-content-between">
-    <a class="navbar-brand" href="#">
-      <span style="color: white;">FundAfrika</span>
-    </a>
-        <a aria-label="Logout" style="color: white;" 
-        target="_blank" rel="noopener" title="Logout"  (click)="logout()">
-          Logout
-        </a>
-  </nav>
+  <a class="navbar-brand" href="#">
+    <span style="color: white;">FundAfrika</span>
+  </a>
+  <a aria-label="Logout" style="color: white;" target="_blank" rel="noopener" title="Logout" (click)="logout()">
+    Logout
+  </a>
+</nav>
 
-  <div class="container">
-    <h1 class="header">Hello {{user.name}}</h1>
-    <p class="header" style="font-size: 1rem;">Education is the key</p>
+<div class="container">
+  <h1 class="header">Hello {{user.name}}</h1>
+  <p class="header" style="font-size: 1rem;">Education is the key</p>
+</div>
+<div *ngIf="teacherDashboard">
+  <app-upload></app-upload>
 </div>

@@ -1,7 +1,25 @@
 .row {
-    margin-top: 50px;
+    margin-top: 10px;
 }
 
 .notes {
     padding-left: 30px;
+}
+
+.custom-select {
+    width: auto;
+}
+
+@media only screen and (min-width: 800px) {
+  
+    .submit-button-container {
+        padding-left: 15.4rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+  
+    .submit-button-container {
+        padding-left: 0;
+    }
 }

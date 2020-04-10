@@ -1,48 +1,45 @@
 <div class="container">
-    <div class="row">
-        <div class="row-6">
-            <form [formGroup]="uploadForm" class="create-form">
-                <h2>Upload Tutorial</h2>
-                <div class="form-group">
-                    <div class="form-group">
-                        <mat-form-field class="input-style">
-                            <select class="custom-select" formControlName="subject">
-                                <option value=""> Select Subject</option>
-                                <option value="Mathematics">Mathematics</option>
-                                <option value="Physics">Physics</option>
-                                <option value="Computer Literacy">Computer Literacy</option>
-                            </select>
-                        </mat-form-field>
-                    </div>
-                    <div class="form-group">
-                        <label for="file">File:</label>
-                        <input type="file" formControlName="video" (change)="browse($event)" accept=".mp4" />
-                    </div>
-                </div>
-
-                <div class="row submit-button-container">
-                    <div class="col-md-4">
-                        <button type="submit" (click)="uploadVideo(uploadForm.value)"
-                            class="btn btn-primary">Upload</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="row-6">
-            <h3>Your Tutorials</h3>
-            <div class="row" *ngFor="let tutorial of tutorialsList">
-                <div class="row-3">
-                    <h5>{{tutorial.subject}}</h5>
-                    <video id="my_video_1" width="600px" height="300px" controls preload="none"
-                        poster='http://video-js.zencoder.com/oceans-clip.jpg'
-                        data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
-                        <source src="{{tutorial.tutorialUrl}}" type='video/mp4' />
-                    </video>
-                </div>
-                <div class="row-3 notes">
-                    <h5> Notes </h5>
+    <form [formGroup]="uploadForm" class="create-form">
+        <h2>Upload Tutorial</h2>
+        <div class="form-group">
+            <div class="form-group">
+                <mat-form-field class="input-style">
+                    <select class="custom-select" formControlName="subject">
+                        <option value=""> Select Subject</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Computer Literacy">Computer Literacy</option>
+                    </select>
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <label for="file">File:</label>
+                <input type="file" formControlName="video" (change)="browse($event)" accept=".mp4" />
+            </div>
+            <div class="row submit-button-container">
+                <div class="col-md-4">
+                    <button type="submit" (click)="uploadVideo(uploadForm.value)"
+                        class="btn btn-primary">Upload</button>
                 </div>
             </div>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <hr />
+    <h3>Your Tutorials</h3>
+    <div class="row" *ngFor="let tutorial of tutorialsList">
+        <div class="col-md-6">
+            <h5>{{tutorial.subject}}</h5>
+            <video id="my_video_1" width="100%" height="300px" controls preload="none"
+                poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
+                <source src="{{tutorial.tutorialUrl}}" type='video/mp4' />
+            </video>
+        </div>
+        <div class="col-md-4 notes">
+            <h5> Notes </h5>
         </div>
     </div>
 </div>

@@ -31,4 +31,18 @@ export class TutorialService {
         });
     });
   }
+
+  getTutorialsBySubject(subject) {
+    return new Promise<any>((resolve, reject) => {
+      this.getAllTutorial().then(tutorials => {
+        let tutorialsBySubject = [];
+        tutorials.forEach(tutorial => {
+          if(tutorial.payload.val().subject === subject) {
+            tutorialsBySubject.push(tutorial);
+          }
+        });
+        resolve(tutorialsBySubject);
+      });
+    });
+  }
 }

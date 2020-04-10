@@ -5,13 +5,15 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import * as firebase from 'firebase/app';
 import { SubscriptionModule } from './subscription/subscription.module';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class UserService {
   constructor(
     public db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
-    private subscriptionModule: SubscriptionModule
+    private subscriptionModule: SubscriptionModule,
+    private authService: AuthService
   ) {
   }
 
@@ -75,6 +77,20 @@ export class UserService {
       }).then(res => {
         resolve(res);
       }).catch(err => reject(err));
+    });
+  }
+
+  getUsersSubjects(currentUser, role) {
+    return new Promise<any>((resolve, reject) => {
+      this.db.list("users/" + role + "/" + currentUser.uid)
+        .snapshotChanges()
+        .subscribe(user => {
+          user.forEach(u => {
+            if (u.key === "subjects") {
+              resolve(u.payload.val());
+            }
+          });
+        });
     });
   }
 }

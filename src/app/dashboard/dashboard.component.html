@@ -14,3 +14,22 @@
 <div *ngIf="teacherDashboard">
   <app-upload></app-upload>
 </div>
+
+<div class="container">
+  <div *ngIf="studentDashboard">
+    <h3>Tutorials</h3>
+    <div class="row" *ngFor="let tutorial of tutorials">
+      <div class="col-md-4">
+        <h5>{{tutorial.subject}}</h5>
+        <video id="my_video_1" width="100%" height="300px" controls preload="none"
+          poster='http://video-js.zencoder.com/oceans-clip.jpg'
+          data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
+          <source src="{{tutorial.tutorialUrl}}" type='video/mp4' />
+        </video>
+      </div>
+      <div class="col-md-4 notes">
+        <h5> Notes </h5>
+      </div>
+    </div>
+  </div>
+</div>

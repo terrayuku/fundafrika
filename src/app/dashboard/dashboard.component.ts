@@ -5,6 +5,7 @@ import { UserService } from '../core/user.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
+import { TutorialService } from '../core/tutorial/tutorial.service';
 
 @Component({
   selector: 'dashboard',
@@ -14,11 +15,14 @@ import { switchMap } from 'rxjs/operators';
 export class DashboardComponent implements OnInit {
 
   user: UserModel = new UserModel();
-  role: String[];
+  role: string;
+  subject: string;
+  tutorials: Object[] = [];
   teacherDashboard: boolean = false;
   studentDashboard: boolean = false;
   moderatorDashboard: boolean = false;
   constructor(
+    private tutorialService: TutorialService,
     public authService: AuthService,
     public userService: UserService,
     private route: ActivatedRoute,
@@ -36,11 +40,23 @@ export class DashboardComponent implements OnInit {
     });
 
     // get role
-      this.route.params.forEach(p => {
-        console.log(p.role);
-        if(p.role === "teachers") this.teacherDashboard = true;
-        else if(p.role === "students") this.studentDashboard = true;
-        else this.moderatorDashboard = true;
+    this.route.params.forEach(p => {
+      this.role = p.role;
+      if (p.role === "teachers") this.teacherDashboard = true;
+      else if (p.role === "students") this.studentDashboard = true;
+      else this.moderatorDashboard = true;
+    });
+
+    this.userService.getUsersSubjects(this.authService.currentUser(), this.role)
+      .then(subjects => {
+        subjects.forEach(subject => {
+          this.tutorialService.getTutorialsBySubject(subject)
+            .then(tutorials => {
+              tutorials.forEach(t => {
+                this.tutorials.push(t.payload.val());
+              });
+            });
+        });
       });
   }
 

@@ -8,9 +8,7 @@ import { SubscriptionModule } from './subscription/subscription.module';
 export class SubjectService {
   subject: Subject;
   constructor(
-    private db: AngularFireDatabase,
-    private authService: AuthService,
-    private subscriptionModule: SubscriptionModule
+    private db: AngularFireDatabase
   ) { }
 
   addSubject(value) {

@@ -24,6 +24,7 @@ import { SubscriptionModule } from './core/subscription/subscription.module';
 import { UploadComponent } from './upload/upload.component';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { UploadService } from './core/upload.service';
+import { AddlanguageComponent } from './addlanguage/addlanguage.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { UploadService } from './core/upload.service';
     RegisterComponent,
     DashboardComponent,
     AddsubjectComponent,
-    UploadComponent
+    UploadComponent,
+    AddlanguageComponent
   ],
   imports: [
     BrowserModule,

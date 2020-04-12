@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddsubjectComponent } from './addsubject/addsubject.component';
 import { UploadService } from './core/upload.service';
 import { UploadComponent } from './upload/upload.component';
+import { AddlanguageComponent } from './addlanguage/addlanguage.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: 'user', component: UserComponent,  resolve: { data: UserResolver}},
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
   { path: 'add-subject', component: AddsubjectComponent,  resolve: { data: UserResolver}},
+  { path: 'add-language', component: AddlanguageComponent,  resolve: { data: UserResolver}},
   { path: 'upload/:currentUser/:role', component: UploadComponent,  resolve: { data: UserResolver}},
   { path: 'dashboard/:currentUser/:role', component: DashboardComponent,  resolve: { data: UserResolver}}
 ];

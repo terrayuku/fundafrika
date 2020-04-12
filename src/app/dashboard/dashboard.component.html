@@ -1,16 +1,23 @@
-<nav class="navbar navbar-dark bg-primary justify-content-between">
+<nav class="navbar navbar-dark bg-primary">
   <a class="navbar-brand" href="#">
     <span style="color: white;">FundAfrika</span>
   </a>
-  <a aria-label="Logout" style="color: white;" target="_blank" rel="noopener" title="Logout" (click)="logout()">
-    Logout
-  </a>
+  <div class="header">
+    <a aria-label="Logout" style="color: white;" target="_blank" rel="noopener" title="Logout" (click)="logout()">
+      {{user.name}}
+    </a>
+    <form [formGroup]="languageForm">
+      <select class="custom-select" formControlName="language" (change)="onSelectLanguage($event)">
+        <option value=""> {{userLanguage}}</option>
+        <option *ngFor="let l of languages" value="{{l.language}}">{{l.language}}</option>
+      </select>
+    </form>
+    <a aria-label="Logout" style="color: white;" target="_blank" rel="noopener" title="Logout" (click)="logout()">
+      Logout
+    </a>
+  </div>
 </nav>
 
-<div class="container">
-  <h1 class="header">Hello {{user.name}}</h1>
-  <p class="header" style="font-size: 1rem;">Education is the key</p>
-</div>
 <div *ngIf="teacherDashboard">
   <app-upload></app-upload>
 </div>

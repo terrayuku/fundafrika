@@ -93,4 +93,18 @@ export class UserService {
         });
     });
   }
+
+  getUsersLanguge(currentUser, role) {
+    return new Promise<any>((resolve, reject) => {
+      this.db.list("users/" + role + "/" + currentUser.uid)
+        .snapshotChanges()
+        .subscribe(user => {
+          user.forEach(u => {
+            if (u.key === "language") {
+              resolve(u.payload.val());
+            }
+          });
+        });
+    });
+  }
 }

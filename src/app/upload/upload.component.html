@@ -6,10 +6,16 @@
                 <mat-form-field class="input-style">
                     <select class="custom-select" formControlName="subject">
                         <option value=""> Select Subject</option>
-                        <option value="Mathematics">Mathematics</option>
-                        <option value="Physics">Physics</option>
-                        <option value="Computer Literacy">Computer Literacy</option>
+                        <option *ngFor="let s of subjects" value="{{s.subject}}">{{s.subject}}</option>
                     </select>
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <mat-form-field class="input-style">
+                    <select class="custom-select" formControlName="language">
+                        <option value=""> Select Language</option>
+                        <option *ngFor="let l of languages" value="{{l.language}}">{{l.language}}</option>
+                      </select>
                 </mat-form-field>
             </div>
             <div class="form-group">
@@ -29,7 +35,7 @@
 <div class="container">
     <hr />
     <h3>Your Tutorials</h3>
-    <div class="row" *ngFor="let tutorial of tutorialsList">
+    <div class="row" *ngFor="let tutorial of tutorials">
         <div class="col-md-6">
             <h5>{{tutorial.subject}}</h5>
             <video id="my_video_1" width="100%" height="300px" controls preload="none"

@@ -4,8 +4,9 @@ import { UserModel } from '../core/user.model';
 import { UserService } from '../core/user.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
-import { switchMap } from 'rxjs/operators';
 import { TutorialService } from '../core/tutorial/tutorial.service';
+import { LanguageService } from '../core/language.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'dashboard',
@@ -18,19 +19,27 @@ export class DashboardComponent implements OnInit {
   role: string;
   subject: string;
   tutorials: Object[] = [];
+  tutorialsTemp: Object = [];
   teacherDashboard: boolean = false;
   studentDashboard: boolean = false;
   moderatorDashboard: boolean = false;
+  languages: Object[] = [];
+  languageForm: FormGroup;
+  userLanguage: String = "";
   constructor(
+    private languageService: LanguageService,
     private tutorialService: TutorialService,
     public authService: AuthService,
     public userService: UserService,
     private route: ActivatedRoute,
     private location: Location,
+    private fb: FormBuilder
   ) {
   }
 
   ngOnInit(): void {
+
+    this.createForm();
     // get data
     this.route.data.subscribe(routeData => {
       let data = routeData['data'];
@@ -46,7 +55,7 @@ export class DashboardComponent implements OnInit {
       else if (p.role === "students") this.studentDashboard = true;
       else this.moderatorDashboard = true;
     });
-
+    // filter tutorials by users subject
     this.userService.getUsersSubjects(this.authService.currentUser(), this.role)
       .then(subjects => {
         subjects.forEach(subject => {
@@ -57,7 +66,32 @@ export class DashboardComponent implements OnInit {
               });
             });
         });
+        // store original temp
+        this.tutorialsTemp = this.tutorials;
       });
+
+    // get users preferred language
+    this.userService.getUsersLanguge(this.authService.currentUser(), this.role)
+      .then(language => {
+        this.userLanguage = language;
+      });
+
+    // load languages
+    this.languageService.getAllLanguages()
+      .then(languages => {
+        languages.forEach(l => {
+          // add all non preferred languages
+          if (this.userLanguage.toLocaleLowerCase() !== l.payload.val().language.toLocaleLowerCase()) {
+            this.languages.push(l.payload.val());
+          }
+        });
+      }).catch(err => console.log("Lang Err", err));
+  }
+
+  createForm() {
+    this.languageForm = this.fb.group({
+      language: ['']
+    })
   }
 
   logout() {
@@ -67,6 +101,23 @@ export class DashboardComponent implements OnInit {
       }, (error) => {
         console.log("Logout error", error);
       });
+  }
+
+  onSelectLanguage(event) {
+    // filter tutorials based on language selected
+    console.log(event.target.value);
+    this.tutorials.forEach(tutorial => {
+      console.log(tutorial['language'].toLocaleLowerCase() === event.target.value.toLocaleLowerCase());
+      this.tutorials.filter(t => {
+        if (t['language'].toLocaleLowerCase() === event.target.value.toLocaleLowerCase()) {
+          this.tutorials = [];
+          this.tutorials.push(t);
+        } else {
+          this.tutorials.push(this.tutorialsTemp);
+        }
+      });
+    });
+    console.log(this.tutorials);
   }
 
 }

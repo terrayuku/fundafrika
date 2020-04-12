@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserModel } from '../core/user.model';
+import { LanguageService } from '../core/language.service';
 
 @Component({
   selector: 'user',
@@ -16,6 +17,7 @@ export class UserComponent implements OnInit {
   user: UserModel = new UserModel();
   profileForm: FormGroup;
   uid: string;
+  languages: Object[] = [];
   validation_messages = {
     'name': [
       { type: 'required', message: 'Name is required.' }
@@ -41,6 +43,7 @@ export class UserComponent implements OnInit {
   };
 
   constructor(
+    private languageService: LanguageService,
     public userService: UserService,
     public authService: AuthService,
     private route: ActivatedRoute,
@@ -52,6 +55,8 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    // load user data
     this.route.data.subscribe(routeData => {
       let data = routeData['data'];
       this.uid = this.authService.afAuth.auth.currentUser.uid;
@@ -60,7 +65,15 @@ export class UserComponent implements OnInit {
         this.createForm(this.user.name, this.user.surname, this.user.age, this.user.grade, this.user.province,
           this.user.category, this.user.subjects, this.user.language);
       }
-    })
+    });
+
+    // load languages
+    this.languageService.getAllLanguages()
+      .then(languages => {
+        languages.forEach(l => {
+          this.languages.push(l.payload.val());
+        });
+      }).catch(err => console.log("Lang Err", err));
   }
 
   createForm(name, surname, age, grade, province, category, subjects, language) {

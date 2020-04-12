@@ -5,3 +5,14 @@
 .notes {
     padding-left: 30px;
 }
+
+.custom-select {
+    background-color: transparent;
+    border: transparent;
+    color: white;
+}
+
+.header {
+    justify-content: right;
+    display: flex;
+}

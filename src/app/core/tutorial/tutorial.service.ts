@@ -15,7 +15,8 @@ export class TutorialService {
       this.db.database.ref("tutorials").push({
         teacher: tutorial.teacher,
         subject: tutorial.subject,
-        tutorialUrl: tutorial.tutorialUrl
+        tutorialUrl: tutorial.tutorialUrl,
+        language: tutorial.language
       }).then(tut => {
         console.log("Added Tutorial");
         resolve(tut);

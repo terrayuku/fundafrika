@@ -18,7 +18,7 @@ export class UploadService {
     private authService: AuthService
   ) { }
 
-  uploadVideo(subject, video) {
+  uploadVideo(subject, video, language) {
     console.log("Upload Video");
     return new Promise<any>((resolve, reject) => {
       let task = this.storage.ref("videos/" + subject + "/" + video.name).put(video);
@@ -30,7 +30,8 @@ export class UploadService {
               this.tutorialService.addTutorial({
                 teacher: this.authService.currentUser().uid,
                 subject: subject,
-                tutorialUrl: downloadURL
+                tutorialUrl: downloadURL, 
+                language: language
               });
               // add tutorial to subject
               this.subjectService.updateTutorial(subject, downloadURL);

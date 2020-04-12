@@ -1,0 +1,47 @@
+<nav class="navbar navbar-dark bg-primary justify-content-between">
+    <a class="navbar-brand" href="#">
+        <span style="color: white;">FundAfrika</span>
+    </a>
+    <a aria-label="Logout" style="color: white;" target="_blank" rel="noopener" title="Logout" (click)="logout()">
+        Logout
+    </a>
+</nav>
+
+<div class="container">
+    <form [formGroup]="languageForm" class="create-form form-style">
+        <h2>Add Language</h2>
+        <div class="form-group">
+            <label for="language">Language</label>
+            <input type="language" class="form-control" formControlName="lang" aria-describedby="languageHelp"
+                placeholder="Enter language">
+        </div>
+        <div class="form-group">
+            <label for="country">Country</label>
+            <input type="country" class="form-control" formControlName="country" aria-describedby="countryHelp"
+                placeholder="Enter country">
+        </div>
+        <div class="form-group">
+            <label for="countryCode">Country Code</label>
+            <input type="countryCode" class="form-control" formControlName="countryCode"
+                aria-describedby="countryCodeHelp" placeholder="Enter country code">
+        </div>
+        <div class="row submit-button-container">
+            <div class="col-md-4">
+                <button type="submit" (click)="addLanguage(languageForm.value)" class="btn btn-primary">Add
+                    Language</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <div class="col">
+        <hr />
+        <h5>Languages</h5>
+        <div class="col-12" *ngFor="let l of languages">
+            <ul>
+                <li>{{l.language}}: {{l.country}}</li>
+            </ul>
+        </div>
+    </div>
+</div>

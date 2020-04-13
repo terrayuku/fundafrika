@@ -13,10 +13,12 @@
 
 .video-section {
     margin-left: 9rem;
+    text-align: left;
 }
 
 .title-description-section {
     margin-left: 6rem;
+    text-align: left;
 }
 /* Mobile View */
 @media only screen and (max-width: 800px) {

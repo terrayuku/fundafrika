@@ -3,16 +3,16 @@
     <span style="color: white;">FundAfrika</span>
   </a>
   <div class="header">
-    <a aria-label="Logout" style="color: white;" target="_blank" rel="noopener" title="Logout" (click)="logout()">
+    <a aria-label="Logout" style="color: white; padding: 8px;" target="_blank" rel="noopener" title="Logout" (click)="logout()">
       {{user.name}}
     </a>
-    <form [formGroup]="languageForm">
+    <!-- <form [formGroup]="languageForm">
       <select class="custom-select" formControlName="language" (change)="onSelectLanguage($event)">
         <option value=""> {{userLanguage}}</option>
         <option *ngFor="let l of languages" value="{{l.language}}">{{l.language}}</option>
       </select>
-    </form>
-    <a aria-label="Logout" style="color: white;" target="_blank" rel="noopener" title="Logout" (click)="logout()">
+    </form> -->
+    <a aria-label="Logout" style="color: white; padding: 8px;" target="_blank" rel="noopener" title="Logout" (click)="logout()">
       Logout
     </a>
   </div>
@@ -35,7 +35,8 @@
         </video>
       </div>
       <div class="col-md-4 notes">
-        <h5> Notes </h5>
+        <h5> {{tutorial.title}} </h5>
+        <p> {{ tutorial.description }}</p>
       </div>
     </div>
   </div>

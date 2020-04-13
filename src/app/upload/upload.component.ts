@@ -21,6 +21,14 @@ export class UploadComponent implements OnInit {
   tutorials: Object[] = []
   subjects: Object[] = [];
   languages: Object[] = [];
+  validation_messages = {
+    'title': [
+      { type: 'required', message: 'Title is required.' }
+    ],
+    'description': [
+      { type: 'required', message: 'Description is required.' }
+    ]
+  };
   constructor(
     private languageService: LanguageService,
     private tutorialService: TutorialService,
@@ -65,7 +73,9 @@ export class UploadComponent implements OnInit {
     this.uploadForm = this.formBuilder.group({
       subject: ['', Validators.required],
       language: ['', Validators.required],
-      video: ['', Validators.required]
+      video: ['', Validators.required],
+      title: ['', Validators.required],
+      description: ['', Validators.required]
     })
   }
 
@@ -74,7 +84,12 @@ export class UploadComponent implements OnInit {
   }
 
   uploadVideo(value) {
-    this.uploadService.uploadVideo(value.subject, this.video, value.language)
+    this.uploadService.uploadVideo({
+      subject: value.subject, 
+      video: this.video, 
+      language: value.language,
+      title: value.title,
+      description: value.description})
       .then(task => {
       })
       .catch(err => {

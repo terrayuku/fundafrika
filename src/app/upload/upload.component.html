@@ -2,30 +2,53 @@
     <form [formGroup]="uploadForm" class="create-form">
         <h2>Upload Tutorial</h2>
         <div class="form-group">
-            <div class="form-group">
-                <mat-form-field class="input-style">
-                    <select class="custom-select" formControlName="subject">
-                        <option value=""> Select Subject</option>
-                        <option *ngFor="let s of subjects" value="{{s.subject}}">{{s.subject}}</option>
-                    </select>
-                </mat-form-field>
-            </div>
-            <div class="form-group">
-                <mat-form-field class="input-style">
-                    <select class="custom-select" formControlName="language">
-                        <option value=""> Select Language</option>
-                        <option *ngFor="let l of languages" value="{{l.language}}">{{l.language}}</option>
-                      </select>
-                </mat-form-field>
-            </div>
-            <div class="form-group">
-                <label for="file">File:</label>
-                <input type="file" formControlName="video" (change)="browse($event)" accept=".mp4" />
+            <div class="row">
+                <div class="col-md-4 title-description-section">
+                    <div class="form-group">
+                        <mat-form-field class="input-style">
+                            <input matInput placeholder="Title" class="form-control" formControlName="title">
+                          </mat-form-field>
+                          <ng-container *ngFor="let validation of validation_messages.title">
+                            <mat-error *ngIf="uploadForm.get('title').hasError(validation.type) && (uploadForm.get('title').dirty
+                             || uploadForm.get('title').touched)">{{validation.message}}</mat-error>
+                          </ng-container>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field class="input-style">
+                            <textarea matInput type="textarea" placeholder="Description" class="form-control" formControlName="description" ></textarea>
+                          </mat-form-field>
+                          <ng-container *ngFor="let validation of validation_messages.description">
+                            <mat-error *ngIf="uploadForm.get('description').hasError(validation.type) && (uploadForm.get('description').dirty
+                             || uploadForm.get('description').touched)">{{validation.message}}</mat-error>
+                          </ng-container>
+                    </div>
+                </div>
+                <div class="col-md-4 video-section">
+                    <div class="form-group">
+                        <mat-form-field class="input-style">
+                            <select class="custom-select" formControlName="subject">
+                                <option value=""> Select Subject</option>
+                                <option *ngFor="let s of subjects" value="{{s.subject}}">{{s.subject}}</option>
+                            </select>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field class="input-style">
+                            <select class="custom-select" formControlName="language">
+                                <option value=""> Select Language</option>
+                                <option *ngFor="let l of languages" value="{{l.language}}">{{l.language}}</option>
+                              </select>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <input type="file" formControlName="video" (change)="browse($event)" accept=".mp4" />
+                    </div>
+                </div>
             </div>
             <div class="row submit-button-container">
                 <div class="col-md-4">
                     <button type="submit" (click)="uploadVideo(uploadForm.value)"
-                        class="btn btn-primary">Upload</button>
+                        class="btn btn-primary" [disabled]="!uploadForm.valid">Upload</button>
                 </div>
             </div>
         </div>
@@ -45,7 +68,8 @@
             </video>
         </div>
         <div class="col-md-4 notes">
-            <h5> Notes </h5>
+            <h5> {{tutorial.title}} </h5>
+            <p>{{tutorial.description}}</p>
         </div>
     </div>
 </div>

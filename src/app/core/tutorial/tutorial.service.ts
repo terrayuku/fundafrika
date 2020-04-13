@@ -16,7 +16,9 @@ export class TutorialService {
         teacher: tutorial.teacher,
         subject: tutorial.subject,
         tutorialUrl: tutorial.tutorialUrl,
-        language: tutorial.language
+        language: tutorial.language,
+        title: tutorial.title,
+        description: tutorial.description
       }).then(tut => {
         console.log("Added Tutorial");
         resolve(tut);

@@ -21,6 +21,10 @@ h5, h1 {
       width: 64%;
       padding-left: 31%;
    }
+
+   .col-md-4 {
+      max-width: 41.333%;
+   }
  }
 
  @media only screen and (max-width: 800px) {
@@ -29,10 +33,5 @@ h5, h1 {
    }
  }
 
- @media only screen and (min-width: 768px) {
-   .col-md-4 {
-      max-width: 41.333%;
-   }
- }
 
  

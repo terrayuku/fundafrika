@@ -1,5 +1,6 @@
 .row {
     margin-top: 10px;
+    padding-left: 10px;
 }
 
 .notes {
@@ -10,16 +11,23 @@
     width: auto;
 }
 
-@media only screen and (min-width: 800px) {
-  
-    .submit-button-container {
-        padding-left: 15.4rem;
-    }
+.video-section {
+    margin-left: 9rem;
+    text-align: left;
 }
 
-@media only screen and (max-width: 768px) {
-  
-    .submit-button-container {
-        padding-left: 0;
-    }
+.title-description-section {
+    margin-left: 6rem;
+    text-align: left;
 }
+/* Mobile View */
+@media only screen and (max-width: 800px) {
+  
+    .video-section {
+        margin-left: 0;
+    }
+ 
+    .title-description-section {
+        margin-left: 0;
+    }
+  }

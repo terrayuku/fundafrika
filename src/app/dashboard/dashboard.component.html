@@ -3,7 +3,7 @@
     <span style="color: white;">FundAfrika</span>
   </a>
   <div class="header">
-    <a aria-label="Logout" style="color: white; padding: 8px;" target="_blank" rel="noopener" title="Logout" (click)="logout()">
+    <a aria-label="Profile" style="color: white; padding: 8px;" target="_blank" rel="noopener" title="Profile">
       {{user.name}}
     </a>
     <!-- <form [formGroup]="languageForm">
@@ -26,18 +26,18 @@
   <div *ngIf="studentDashboard">
     <h3>Tutorials</h3>
     <div class="row" *ngFor="let tutorial of tutorials">
-      <div class="col-md-4">
+      <div class="col-md-6">
         <h5>{{tutorial.subject}}</h5>
         <video id="my_video_1" width="100%" height="300px" controls preload="none"
-          poster='http://video-js.zencoder.com/oceans-clip.jpg'
           data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
           <source src="{{tutorial.tutorialUrl}}" type='video/mp4' />
         </video>
       </div>
-      <div class="col-md-4 notes">
+      <div class="col-md-6 notes">
         <h5> {{tutorial.title}} </h5>
         <p> {{ tutorial.description }}</p>
       </div>
     </div>
+    <hr />
   </div>
 </div>

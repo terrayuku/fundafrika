@@ -15,10 +15,10 @@ import { LanguageService } from '../core/language.service';
 
 export class UploadComponent implements OnInit {
 
-  uploadForm: FormGroup
-  video: File
-  loc: string
-  tutorials: Object[] = []
+  uploadForm: FormGroup;
+  video: File;
+  loc: string;
+  tutorials: Object[] = [];
   subjects: Object[] = [];
   languages: Object[] = [];
   validation_messages = {
@@ -58,7 +58,7 @@ export class UploadComponent implements OnInit {
           this.subjects.push(s.payload.val());
         });
       })
-      .catch(err => console.log("Lang Subj Err", err));
+      .catch(err => console.log('Lang Subj Err', err));
 
        // load languages
     this.languageService.getAllLanguages()
@@ -66,7 +66,7 @@ export class UploadComponent implements OnInit {
       languages.forEach(l => {
           this.languages.push(l.payload.val());
       });
-    }).catch(err => console.log("Lang Err", err));
+    }).catch(err => console.log('Lang Err', err));
   }
 
   createForm() {
@@ -76,7 +76,7 @@ export class UploadComponent implements OnInit {
       video: ['', Validators.required],
       title: ['', Validators.required],
       description: ['', Validators.required]
-    })
+    });
   }
 
   browse(event) {
@@ -85,8 +85,8 @@ export class UploadComponent implements OnInit {
 
   uploadVideo(value) {
     this.uploadService.uploadVideo({
-      subject: value.subject, 
-      video: this.video, 
+      subject: value.subject,
+      video: this.video,
       language: value.language,
       title: value.title,
       description: value.description})
@@ -94,16 +94,7 @@ export class UploadComponent implements OnInit {
       })
       .catch(err => {
         console.log(err);
-      })
-  }
-
-  logout(){
-    this.authService.doLogout()
-    .then((res) => {
-      this.location.back();
-    }, (error) => {
-      console.log("Logout error", error);
-    });
+      });
   }
 
 }

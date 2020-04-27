@@ -19,11 +19,10 @@ export class UploadService {
   ) { }
 
   uploadVideo(value) {
-    console.log("Upload Video");
     return new Promise<any>((resolve, reject) => {
-      let task = this.storage.ref("videos/" + value.subject + "/" + value.video.name).put(value.video);
+      const task = this.storage.ref('videos/' + value.subject + '/' + value.video.name).put(value.video);
       task.then(t => {
-        if (t.task.snapshot.state === "success") {
+        if (t.task.snapshot.state === 'success') {
           t.task.snapshot.ref.getDownloadURL().then(downloadURL => {
             // add tutorial
             this.tutorialService.addTutorial({

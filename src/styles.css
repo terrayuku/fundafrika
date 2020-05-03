@@ -9,17 +9,16 @@ h5, h1 {
    font-weight: bold;
 }
 
+p {
+   text-align: justify;
+}
+
 @media only screen and (min-width: 768px) {
   
    .container{
       text-align: center;
       align-items: center;
       align-content: center;
-   }
-
-   .form-style {
-      width: 64%;
-      padding-left: 31%;
    }
 
    .col-md-4 {
